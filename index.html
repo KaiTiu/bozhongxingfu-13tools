@@ -273,22 +273,30 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 <div id="certificateBox" style="margin-top:16px"></div>
 </div>
 </section>
-<div class="footer">🌱 播种幸福｜13项幸福人生工具箱 · V2.4<br/>更好的自己，从一个小小的决定开始。</div>
+<div class="footer">🌱 播种幸福｜13项幸福人生工具箱 · V2.5<br/>更好的自己，从一个小小的决定开始。</div>
 </div>
 <script>
 function returnToCourse(){
-  try{
-    if(window.opener && !window.opener.closed){
-      window.opener.focus();
-      window.close();
-      return;
-    }
-  }catch(e){}
+  const params=new URLSearchParams(window.location.search);
+  const target=params.get('return');
+  if(target){
+    try{
+      const u=new URL(target);
+      if(u.protocol==='https:' || u.protocol==='http:'){
+        window.location.href=u.href;
+        return;
+      }
+    }catch(e){}
+  }
+  if(document.referrer && !document.referrer.includes('bozhongxingfu-13tools.vercel.app')){
+    window.location.href=document.referrer;
+    return;
+  }
   if(window.history.length>1){
     window.history.back();
     return;
   }
-  alert('请回到原本打开《播种幸福｜21天幸福人生课程》的浏览器分页。');
+  alert('找不到21天课程入口。请从21天课程里的「13项幸福工具箱」按钮重新进入一次。');
 }
 
 
