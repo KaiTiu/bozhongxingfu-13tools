@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-Hans">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#355a42">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#355a42" name="theme-color"/>
 <title>播种幸福｜13项幸福人生工具箱 Web App</title>
 <style>
 :root{
@@ -119,165 +120,178 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
   .app{max-width:none;padding:0}.view{display:none!important}#certificateView{display:block!important}
   .card{box-shadow:none;border:none}.certificate{margin-top:40px}
 }
+
+/* Return to 21-day course */
+.return-course-btn{
+  background:#fff!important;
+  color:var(--green)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.10);
+}
+@media(max-width:600px){
+  .return-course-btn{
+    width:100%;
+    padding:12px 14px!important;
+    font-size:14px!important;
+    margin-bottom:3px;
+  }
+}
 </style>
 </head>
 <body>
 <div class="app">
-  <section class="hero">
-    <div class="eyebrow">🌱 播种幸福</div>
-    <h1>13项幸福人生工具箱</h1>
-    <p>把知道的，慢慢变成生活。每次只做一个小练习，也是在为自己种下一颗幸福种子。</p>
-    <div class="top-actions">
-      <button onclick="window.location.href='guide.html'">❓ 第一次使用？查看指南</button>
-      <button id="exportAll">⬇️ 导出全部备份</button>
-      <button id="importBackup">⬆️ 恢复备份</button>
-      <input id="backupFile" type="file" accept=".json,application/json" style="display:none">
-      <button id="resetAll">🧹 清除全部Demo资料</button>
-    </div>
-  </section>
-
-  <div class="stats">
-    <div class="stat"><strong id="statDays">0</strong><small>实践天数</small></div>
-    <div class="stat"><strong id="statStreak">0</strong><small>连续天数</small></div>
-    <div class="stat"><strong id="statRecords">0</strong><small>总记录数</small></div>
-    <div class="stat"><strong id="statGarden">土壤</strong><small>幸福花园</small></div>
-  </div>
-
-  <div class="nav">
-    <button class="active" data-view="homeView">🏠 工具首页</button>
-    <button data-view="scenarioView">🧭 我现在需要什么？</button>
-    <button data-view="progressView">📊 我的进度</button>
-    <button data-view="gardenView">🌷 幸福花园</button>
-    <button data-view="historyView">📚 全部记录</button>
-    <button data-view="certificateView">🏆 完成证书</button>
-  </div>
-
-  <section id="homeView" class="view active">
-    <div class="card">
-      <h2>🧰 选择今天最需要的工具</h2>
-      <div class="sub">不需要一次做完13项。点击任何一个工具就可以直接开始。</div>
-      <div class="toolgrid" id="toolGrid"></div>
-    </div>
-  </section>
-
-
-  <section id="scenarioView" class="view">
-    <div class="card">
-      <h2>🧭 我现在最需要什么帮助？</h2>
-      <div class="sub">如果你不知道该使用哪一个工具，可以先从现在的状态开始。选择最接近你目前情况的一项。</div>
-
-      <div class="scenario-grid">
-        <article class="scenario-card">
-          <div class="sym">😟</div>
-          <h3>A｜我的情绪很乱</h3>
-          <p>焦虑、难过、生气、委屈、压力很大，或者脑袋很乱。</p>
-          <button class="btn primary" style="width:100%" onclick="showScenario('emotion')">看看我现在可以怎么做</button>
-        </article>
-
-        <article class="scenario-card">
-          <div class="sym">❤️</div>
-          <h3>B｜我的关系出了问题</h3>
-          <p>争吵、误会、冷战、不知道怎样表达，或不知道怎样重新开始沟通。</p>
-          <button class="btn primary" style="width:100%" onclick="showScenario('relationship')">看看我现在可以怎么做</button>
-        </article>
-
-        <article class="scenario-card">
-          <div class="sym">💰</div>
-          <h3>C｜我最近很担心钱</h3>
-          <p>压力、缺乏感、担心未来，或一直觉得自己拥有得不够。</p>
-          <button class="btn primary" style="width:100%" onclick="showScenario('money')">看看我现在可以怎么做</button>
-        </article>
-
-        <article class="scenario-card">
-          <div class="sym">💼</div>
-          <h3>D｜我对工作 / 事业很迷茫</h3>
-          <p>没有方向、没有动力、不知道自己的价值，或不知道下一步该做什么。</p>
-          <button class="btn primary" style="width:100%" onclick="showScenario('career')">看看我现在可以怎么做</button>
-        </article>
-
-        <article class="scenario-card">
-          <div class="sym">🔄</div>
-          <h3>E｜我又坚持不下去了</h3>
-          <p>拖延、中断、没有动力，或一个好习惯又停掉了。</p>
-          <button class="btn primary" style="width:100%" onclick="showScenario('habit')">看看我现在可以怎么做</button>
-        </article>
-
-        <article class="scenario-card">
-          <div class="sym">🧭</div>
-          <h3>F｜我不知道该怎么选择</h3>
-          <p>两个或多个选择之间犹豫，担心选错，脑中一直反复比较。</p>
-          <button class="btn primary" style="width:100%" onclick="showScenario('choice')">看看我现在可以怎么做</button>
-        </article>
-      </div>
-
-      <div id="scenarioGuide"></div>
-    </div>
-  </section>
-
-  <section id="toolView" class="view">
-    <div class="card">
-      <div class="btnrow" style="margin-top:0"><button class="btn ghost" id="backHome">← 返回工具箱</button></div>
-      <div id="toolContent"></div>
-    </div>
-  </section>
-
-  <section id="progressView" class="view">
-    <div class="card">
-      <h2>📊 我的幸福进度</h2>
-      <div class="sub">不是追求完美，而是看见自己愿意持续的每一天。</div>
-      <div class="progressrow"><div class="progresshead"><span>🌱 7天幸福挑战</span><span id="p7t">0 / 7</span></div><div class="progress"><div id="p7b" style="width:0"></div></div></div>
-      <div class="progressrow"><div class="progresshead"><span>🌿 21天幸福实践</span><span id="p21t">0 / 21</span></div><div class="progress"><div id="p21b" style="width:0"></div></div></div>
-      <div class="progressrow"><div class="progresshead"><span>🌳 30天幸福习惯</span><span id="p30t">0 / 30</span></div><div class="progress"><div id="p30b" style="width:0"></div></div></div>
-      <div class="notice" id="progressMsg">🌱 今天做一个小练习，就已经是开始。</div>
-    </div>
-  </section>
-
-  <section id="gardenView" class="view">
-    <div class="card">
-      <h2>🌷 我的幸福花园</h2>
-      <div class="sub">任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。</div>
-      <div class="garden">
-        <div class="gardenmsg" id="gardenMsg">写下第一份记录，就种下第一颗种子。</div>
-        <div class="stagelegend">
-          <div class="stageitem"><span>🌰</span>第1–2天<br>种子</div>
-          <div class="stageitem"><span>🌱</span>第3–7天<br>发芽</div>
-          <div class="stageitem"><span>🌿</span>第8–15天<br>成长</div>
-          <div class="stageitem"><span>🪻</span>第16–20天<br>花苞</div>
-          <div class="stageitem"><span>🌷</span>第21–29天<br>开花</div>
-          <div class="stageitem"><span>🌳</span>第30天<br>幸福花园</div>
-        </div>
-        <div class="gardengrid" id="gardenGrid"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="historyView" class="view">
-    <div class="card">
-      <h2>📚 全部幸福记录</h2>
-      <div class="sub">这里会汇总你使用13项工具保存过的记录。</div>
-      <div class="notice" style="margin:12px 0">💾 换手机、换电脑或浏览器资料被清除时，可以使用首页的「⬆️ 恢复备份」选择之前导出的 JSON 文件。恢复前，系统会先自动保存现有资料的安全备份。</div>
-      <div id="allHistory"></div>
-    </div>
-  </section>
-
-  <section id="certificateView" class="view">
-    <div class="card">
-      <h2>🏆 21天完成证书</h2>
-      <div class="sub">满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。</div>
-      <label>学员姓名</label><input id="certName" placeholder="请输入姓名">
-      <div class="btnrow">
-        <button class="btn primary" id="buildCert">生成 / 更新证书</button>
-        <button class="btn secondary" id="printCert">打印 / 存成 PDF</button>
-      </div>
-      <div class="status" id="certStatus"></div>
-      <div id="certificateBox" style="margin-top:16px"></div>
-    </div>
-  </section>
-
-  <div class="footer">🌱 播种幸福｜13项幸福人生工具箱 · V2.3<br>更好的自己，从一个小小的决定开始。</div>
+<section class="hero">
+<div class="eyebrow">🌱 播种幸福</div>
+<h1>13项幸福人生工具箱</h1>
+<p>把知道的，慢慢变成生活。每次只做一个小练习，也是在为自己种下一颗幸福种子。</p>
+<div class="top-actions"><button class="return-course-btn" id="returnCourseBtn" onclick="returnToCourse()">← 回到21天课程</button>
+<button onclick="window.location.href='guide.html'">❓ 第一次使用？查看指南</button>
+<button id="exportAll">⬇️ 导出全部备份</button>
+<button id="importBackup">⬆️ 恢复备份</button>
+<input accept=".json,application/json" id="backupFile" style="display:none" type="file"/>
+<button id="resetAll">🧹 清除全部Demo资料</button>
 </div>
-
+</section>
+<div class="stats">
+<div class="stat"><strong id="statDays">0</strong><small>实践天数</small></div>
+<div class="stat"><strong id="statStreak">0</strong><small>连续天数</small></div>
+<div class="stat"><strong id="statRecords">0</strong><small>总记录数</small></div>
+<div class="stat"><strong id="statGarden">土壤</strong><small>幸福花园</small></div>
+</div>
+<div class="nav">
+<button class="active" data-view="homeView">🏠 工具首页</button>
+<button data-view="scenarioView">🧭 我现在需要什么？</button>
+<button data-view="progressView">📊 我的进度</button>
+<button data-view="gardenView">🌷 幸福花园</button>
+<button data-view="historyView">📚 全部记录</button>
+<button data-view="certificateView">🏆 完成证书</button>
+</div>
+<section class="view active" id="homeView">
+<div class="card">
+<h2>🧰 选择今天最需要的工具</h2>
+<div class="sub">不需要一次做完13项。点击任何一个工具就可以直接开始。</div>
+<div class="toolgrid" id="toolGrid"></div>
+</div>
+</section>
+<section class="view" id="scenarioView">
+<div class="card">
+<h2>🧭 我现在最需要什么帮助？</h2>
+<div class="sub">如果你不知道该使用哪一个工具，可以先从现在的状态开始。选择最接近你目前情况的一项。</div>
+<div class="scenario-grid">
+<article class="scenario-card">
+<div class="sym">😟</div>
+<h3>A｜我的情绪很乱</h3>
+<p>焦虑、难过、生气、委屈、压力很大，或者脑袋很乱。</p>
+<button class="btn primary" onclick="showScenario('emotion')" style="width:100%">看看我现在可以怎么做</button>
+</article>
+<article class="scenario-card">
+<div class="sym">❤️</div>
+<h3>B｜我的关系出了问题</h3>
+<p>争吵、误会、冷战、不知道怎样表达，或不知道怎样重新开始沟通。</p>
+<button class="btn primary" onclick="showScenario('relationship')" style="width:100%">看看我现在可以怎么做</button>
+</article>
+<article class="scenario-card">
+<div class="sym">💰</div>
+<h3>C｜我最近很担心钱</h3>
+<p>压力、缺乏感、担心未来，或一直觉得自己拥有得不够。</p>
+<button class="btn primary" onclick="showScenario('money')" style="width:100%">看看我现在可以怎么做</button>
+</article>
+<article class="scenario-card">
+<div class="sym">💼</div>
+<h3>D｜我对工作 / 事业很迷茫</h3>
+<p>没有方向、没有动力、不知道自己的价值，或不知道下一步该做什么。</p>
+<button class="btn primary" onclick="showScenario('career')" style="width:100%">看看我现在可以怎么做</button>
+</article>
+<article class="scenario-card">
+<div class="sym">🔄</div>
+<h3>E｜我又坚持不下去了</h3>
+<p>拖延、中断、没有动力，或一个好习惯又停掉了。</p>
+<button class="btn primary" onclick="showScenario('habit')" style="width:100%">看看我现在可以怎么做</button>
+</article>
+<article class="scenario-card">
+<div class="sym">🧭</div>
+<h3>F｜我不知道该怎么选择</h3>
+<p>两个或多个选择之间犹豫，担心选错，脑中一直反复比较。</p>
+<button class="btn primary" onclick="showScenario('choice')" style="width:100%">看看我现在可以怎么做</button>
+</article>
+</div>
+<div id="scenarioGuide"></div>
+</div>
+</section>
+<section class="view" id="toolView">
+<div class="card">
+<div class="btnrow" style="margin-top:0"><button class="btn ghost" id="backHome">← 返回工具箱</button></div>
+<div id="toolContent"></div>
+</div>
+</section>
+<section class="view" id="progressView">
+<div class="card">
+<h2>📊 我的幸福进度</h2>
+<div class="sub">不是追求完美，而是看见自己愿意持续的每一天。</div>
+<div class="progressrow"><div class="progresshead"><span>🌱 7天幸福挑战</span><span id="p7t">0 / 7</span></div><div class="progress"><div id="p7b" style="width:0"></div></div></div>
+<div class="progressrow"><div class="progresshead"><span>🌿 21天幸福实践</span><span id="p21t">0 / 21</span></div><div class="progress"><div id="p21b" style="width:0"></div></div></div>
+<div class="progressrow"><div class="progresshead"><span>🌳 30天幸福习惯</span><span id="p30t">0 / 30</span></div><div class="progress"><div id="p30b" style="width:0"></div></div></div>
+<div class="notice" id="progressMsg">🌱 今天做一个小练习，就已经是开始。</div>
+</div>
+</section>
+<section class="view" id="gardenView">
+<div class="card">
+<h2>🌷 我的幸福花园</h2>
+<div class="sub">任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。</div>
+<div class="garden">
+<div class="gardenmsg" id="gardenMsg">写下第一份记录，就种下第一颗种子。</div>
+<div class="stagelegend">
+<div class="stageitem"><span>🌰</span>第1–2天<br/>种子</div>
+<div class="stageitem"><span>🌱</span>第3–7天<br/>发芽</div>
+<div class="stageitem"><span>🌿</span>第8–15天<br/>成长</div>
+<div class="stageitem"><span>🪻</span>第16–20天<br/>花苞</div>
+<div class="stageitem"><span>🌷</span>第21–29天<br/>开花</div>
+<div class="stageitem"><span>🌳</span>第30天<br/>幸福花园</div>
+</div>
+<div class="gardengrid" id="gardenGrid"></div>
+</div>
+</div>
+</section>
+<section class="view" id="historyView">
+<div class="card">
+<h2>📚 全部幸福记录</h2>
+<div class="sub">这里会汇总你使用13项工具保存过的记录。</div>
+<div class="notice" style="margin:12px 0">💾 换手机、换电脑或浏览器资料被清除时，可以使用首页的「⬆️ 恢复备份」选择之前导出的 JSON 文件。恢复前，系统会先自动保存现有资料的安全备份。</div>
+<div id="allHistory"></div>
+</div>
+</section>
+<section class="view" id="certificateView">
+<div class="card">
+<h2>🏆 21天完成证书</h2>
+<div class="sub">满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。</div>
+<label>学员姓名</label><input id="certName" placeholder="请输入姓名"/>
+<div class="btnrow">
+<button class="btn primary" id="buildCert">生成 / 更新证书</button>
+<button class="btn secondary" id="printCert">打印 / 存成 PDF</button>
+</div>
+<div class="status" id="certStatus"></div>
+<div id="certificateBox" style="margin-top:16px"></div>
+</div>
+</section>
+<div class="footer">🌱 播种幸福｜13项幸福人生工具箱 · V2.4<br/>更好的自己，从一个小小的决定开始。</div>
+</div>
 <script>
+function returnToCourse(){
+  try{
+    if(window.opener && !window.opener.closed){
+      window.opener.focus();
+      window.close();
+      return;
+    }
+  }catch(e){}
+  if(window.history.length>1){
+    window.history.back();
+    return;
+  }
+  alert('请回到原本打开《播种幸福｜21天幸福人生课程》的浏览器分页。');
+}
+
+
 const KEY='bozhongxingfu_13tools_v1';
 const $=id=>document.getElementById(id);
 const tools=[
