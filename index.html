@@ -8,7 +8,7 @@
 <meta http-equiv="Expires" content="0"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#355a42" name="theme-color"/>
-<title>播种幸福｜我的幸福陪伴系统 V5.3</title>
+<title>播种幸福｜我的幸福陪伴系统 V5.5</title>
 <style>
 :root{
   --bg:#f6f1e7;--card:#fffdf8;--green:#355a42;--green2:#54735d;--sage:#dfe9db;
@@ -207,7 +207,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
     <input accept=".json,application/json" id="backupFile" style="display:none" type="file"/>
     <button id="resetAll">🧹 清除当前资料</button>
   </div>
-  <div class="v5CloudBar"><span class="v5CloudPill local" id="v5CloudStatus">💻 目前保存在这台设备</span></div><div class="v53Version" id="v53Version">V5.4 · CLICK FIX + GUIDED HISTORY</div>
+  <div class="v5CloudBar"><span class="v5CloudPill local" id="v5CloudStatus">💻 目前保存在这台设备</span></div><div class="v53Version" id="v53Version">V5.5 · TOOL OPEN FIX + GUIDED HISTORY</div>
 </section>
 <section class="v51CompanionTop"><div class="v5Companion" id="v5Companion"></div></section>
 <div class="stats">
@@ -235,7 +235,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 <section class="view" id="gardenView"><div class="card"><h2 id="gardenTitle">🌷 我的幸福花园</h2><div class="sub" id="gardenSub">任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。</div><div class="garden"><div class="gardenmsg" id="gardenMsg"></div><div class="stagelegend" id="stageLegend"></div><div class="gardengrid" id="gardenGrid"></div></div></div></section>
 <section class="view" id="historyView"><div class="card"><h2 id="historyTitle">📚 全部幸福记录</h2><div class="sub" id="historySub">这里会汇总你使用13项工具保存过的记录。</div><div class="notice" id="historyNotice" style="margin:12px 0"></div><div class="v5HistoryTools"><select id="v5HistoryFilter"></select><input id="v5HistorySearch" type="search" placeholder="搜索以前写过的内容…"></div><div id="allHistory" class="v5Timeline"></div></div></section>
 <section class="view" id="certificateView"><div class="card"><h2 id="certTitle">🏆 21天完成证书</h2><div class="sub" id="certSub">满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。</div><label id="certNameLabel">学员姓名</label><input id="certName" placeholder="请输入姓名"/><div class="btnrow"><button class="btn primary" id="buildCert">生成 / 更新证书</button><button class="btn secondary" id="printCert">打印 / 存成 PDF</button></div><div class="status" id="certStatus"></div><div id="certificateBox" style="margin-top:16px"></div></div></section>
-<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.4<br/>更好的自己，从一个小小的决定开始。</div>
+<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.5<br/>更好的自己，从一个小小的决定开始。</div>
 </div>
 
 <div class="v5AuthModal" id="v5AuthModal" role="dialog" aria-modal="true">
@@ -270,7 +270,7 @@ const UI={
  gardenTitle:bi('🌷 我的幸福花园','🌷 My Happiness Garden'),gardenSub:bi('任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。','Complete and save any tool to count that date as one practice day. Each calendar day counts once.'),
  historyTitle:bi('📖 我的幸福成长记录','📖 My Happiness Growth Journal'),historySub:bi('这里不是资料仓库，而是让你回看：以前发生了什么、我当时怎样想、播下什么种子，以及后来怎样。','This is not just a storage page. It lets you look back at what happened, how you responded, what seed you chose, and what happened afterwards.'),historyNotice:bi('☁️ 登录会员账号后，这里的成长记录会同步到云端；JSON 导出仍可作为额外备份。','☁️ After member sign-in, your growth journal syncs to the cloud. JSON export remains available as an extra backup.'),
  certTitle:bi('🏆 21天完成证书','🏆 21-Day Completion Certificate'),certSub:bi('满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。','After at least 21 different practice days, you can generate your completion certificate. Before that, you can still preview it.'), certName:bi('学员姓名','Participant Name'), certPlaceholder:bi('请输入姓名','Enter your name'), buildCert:bi('生成 / 更新证书','Generate / Update Certificate'), printCert:bi('打印 / 存成 PDF','Print / Save as PDF'),
- footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.4<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.3<br/>Notice yourself · Choose again · Plant one seed at a time'),
+ footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.5<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.5<br/>Notice yourself · Choose again · Plant one seed at a time'),
  openTool:bi('打开工具 →','Open Tool →'), viewCert:bi('查看证书','View Certificate'), date:bi('日期','Date'), save:bi('保存这份记录','Save This Record'), update:bi('更新这份记录','Update This Record'), clear:bi('清空','Clear'), editing:bi('正在编辑已保存的记录。','Editing a saved record.'), edit:bi('编辑','Edit'), del:bi('删除','Delete'),
  noRecords:bi('🌿 还没有记录。先从一个最需要的工具开始吧。','🌿 No records yet. Start with the tool you need most today.'), startPractice:bi('开始这个练习 →','Start This Practice →'), recommended:bi('👉 建议使用：','👉 Recommended tool: ')
 };
@@ -330,7 +330,7 @@ function renderStatic(){
  renderScenarioCards();
  const at=$('v51AllToolsTitle');if(at)at.textContent=LANG==='en'?'If you already know what you need, you can also choose a tool directly:':'如果你已经知道自己需要什么，也可以直接选择工具：';
 }
-function setLanguage(lang){LANG=lang==='en'?'en':'zh';localStorage.setItem(LANG_KEY,LANG);const u=new URL(location.href);u.searchParams.set('lang',LANG);history.replaceState(null,'',u);
+function setLanguage(lang){LANG=lang==='en'?'en':'zh';localStorage.setItem(LANG_KEY,LANG);const u=new URL(location.href);u.searchParams.set('lang',LANG);history.replaceState(null,'',u);renderStatic();renderTools();refreshStats();renderProgress();renderGarden();renderHistory();renderCertificate();if(selectedTool&&$('toolView').classList.contains('active')){const existing=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(existing)}if($('scenarioGuide').innerHTML)$('scenarioGuide').innerHTML='';}
 
 // ===== V5 MY HAPPINESS COMPANION =====
 const V5_SUPABASE_URL='https://sopjtukcrghvgemdishz.supabase.co';
@@ -406,15 +406,9 @@ async function v5CloudUpsert(r){if(!V5_CLOUD_READY||!r)return;try{const url=V5_S
 async function v5CloudDelete(id){if(!V5_CLOUD_READY)return;try{await fetch(V5_SUPABASE_URL+`/rest/v1/happiness_tool_records?user_id=eq.${encodeURIComponent(V5_USER.id)}&client_id=eq.${encodeURIComponent(id)}`,{method:'DELETE',headers:v5Headers(V5_SESSION.access_token,false)})}catch(e){console.warn('toolbox cloud delete',e)}}
 async function v5CloudMerge(){if(!V5_CLOUD_READY)return;const res=await fetch(V5_SUPABASE_URL+`/rest/v1/happiness_tool_records?user_id=eq.${encodeURIComponent(V5_USER.id)}&select=id,client_id,tool,record_date,data,followup,followup_at,updated_at&order=record_date.desc,updated_at.desc`,{headers:v5Headers(V5_SESSION.access_token,false)});if(!res.ok)throw new Error(LANG==='en'?'Cloud record table is not ready yet. Please run the V5 SQL setup first.':'云端工具记录表还没有准备好，请先执行 V5 SQL 设置。');const rows=await res.json(),local=[...db().records],map=new Map(local.map(r=>[Number(r.id),r]));for(const row of rows){map.set(Number(row.client_id),{id:Number(row.client_id),tool:row.tool,date:row.record_date,data:row.data||{},followup:row.followup||'',followupAt:row.followup_at||'',updatedAt:row.updated_at||''})}const merged=[...map.values()];saveDB({records:merged});const cloudIds=new Set(rows.map(x=>Number(x.client_id)));for(const r of local){if(!cloudIds.has(Number(r.id)))await v5CloudUpsert(r)}refreshStats();renderProgress();renderGarden();renderHistory();v5RenderCompanion()}
 async function v5InitCloud(){V5_SESSION=v5LoadSession();if(!V5_SESSION){v5CloudStatus();return}try{V5_USER=await v5AuthUser(V5_SESSION)}catch(e){try{V5_SESSION=await v5Refresh();V5_USER=await v5AuthUser(V5_SESSION)}catch(x){v5SaveSession(null);V5_SESSION=null;v5CloudStatus();return}}try{await v5CheckEnrollment(V5_USER.id,V5_SESSION.access_token);V5_PROFILE=await v5LoadProfile(V5_USER.id,V5_SESSION.access_token);V5_CLOUD_READY=true;await v5CloudMerge()}catch(e){console.warn(e);V5_CLOUD_READY=false}v5CloudStatus()}
-const v5BaseSaveToolRecord=saveToolRecord;saveToolRecord=function(){const editing=editingRecordId;const beforeIds=new Set(db().records.map(r=>r.id));v5BaseSaveToolRecord();let x=db(),r=editing?x.records.find(a=>a.id===editing):x.records.filter(a=>!beforeIds.has(a.id)).sort((a,b)=>b.id-a.id)[0];if(r){r.updatedAt=new Date().toISOString();saveDB(x);v5CloudUpsert(r)}v5RenderCompanion();renderHistory()};
-const v5BaseFollow=window.v4SaveFollowup;window.v4SaveFollowup=function(id,v){v5BaseFollow(id,v);const x=db(),r=x.records.find(a=>a.id===id);if(r){r.updatedAt=new Date().toISOString();saveDB(x);v5CloudUpsert(r)}v5RenderCompanion();renderHistory()};
-const v5BaseDelete=window.deleteRecord;window.deleteRecord=function(id){const exists=db().records.find(r=>r.id===id);v5BaseDelete(id);if(exists)v5CloudDelete(id);v5RenderCompanion();renderHistory()};
-const v5BaseSetLanguage=setLanguage;setLanguage=function(lang){v5BaseSetLanguage(lang);v5RefreshAuthText();v5CloudStatus();v5RenderCompanion();v5PopulateHistoryFilters();renderHistory()};window.setLanguage=setLanguage;
-const v5BaseShow=show;show=function(view){v5BaseShow(view);if(view==='homeView')v5RenderCompanion();if(view==='historyView'){v5PopulateHistoryFilters();renderHistory()}};
-// Backward-compatible V4 records remain readable; V5 only enriches presentation and optional cloud sync.
-setTimeout(()=>{v5RenderCompanion();v5PopulateHistoryFilters();v5CloudStatus();v5InitCloud();},0);
+// V5 integration wrappers are installed after the V4 base handlers are defined.
 
-renderStatic();renderTools();refreshStats();renderProgress();renderGarden();renderHistory();renderCertificate();if(selectedTool&&$('toolView').classList.contains('active')){const existing=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(existing)} if($('scenarioGuide').innerHTML)$('scenarioGuide').innerHTML='';}
+
 // ===== V4 LIFE-USEFUL TOOLBOX =====
 const V4_NEEDS=['emotion','relationship','money','career','habit','choice','overthink','okay'];
 function v4RenderNeedQuick(){const g=$('needQuickGrid');if(!g)return;const en=LANG==='en';$('needNowTitle').textContent=en?'What is happening today?':'今天发生什么了？';$('needNowLead').textContent=en?'Do not study all 13 tools first. Choose what feels closest and I will take you directly to a useful practice.':'不用先研究13个工具。先选最接近你现在的情况，我会直接带你去适合的练习。';g.innerHTML=V4_NEEDS.map(id=>{const s=SCENARIOS[id];return `<button class="needBtn" onclick="v4OpenNeed('${id}')">${s.icon} ${L(s.title)}</button>`}).join('')}
@@ -482,6 +476,14 @@ function renderScenarioCards(){$('scenarioCards').innerHTML=Object.entries(SCENA
 window.showScenario=id=>{const s=SCENARIOS[id];if(!s)return;const tool=toolObj(s.tool);$('scenarioGuide').innerHTML=`<div class="guidebox"><h3>${s.icon} ${s.code}｜${L(s.title)}</h3><p>${L(s.intro)}</p><ul class="questions">${s.qs.map(q=>`<li>${L(q)}</li>`).join('')}</ul><div class="recommend">${L(UI.recommended)}${tool.icon} ${L(tool.name)}</div><div class="btnrow"><button class="btn primary" onclick="openTool('${s.tool}')">${L(UI.startPractice)}</button></div></div>`;$('scenarioGuide').scrollIntoView({behavior:'smooth',block:'start'})};
 renderStatic();renderTools();refreshStats();renderProgress();renderGarden();renderHistory();renderCertificate();
 
+// ===== V5 CLOUD + COMPANION INTEGRATION (installed after V4 base handlers) =====
+const v5BaseSaveToolRecord=saveToolRecord;saveToolRecord=function(){const editing=editingRecordId;const beforeIds=new Set(db().records.map(r=>r.id));v5BaseSaveToolRecord();let x=db(),r=editing?x.records.find(a=>a.id===editing):x.records.filter(a=>!beforeIds.has(a.id)).sort((a,b)=>b.id-a.id)[0];if(r){r.updatedAt=new Date().toISOString();saveDB(x);v5CloudUpsert(r)}v5RenderCompanion();renderHistory()};
+const v5BaseFollow=window.v4SaveFollowup;window.v4SaveFollowup=function(id,v){if(typeof v5BaseFollow==='function')v5BaseFollow(id,v);const x=db(),r=x.records.find(a=>a.id===id);if(r){r.updatedAt=new Date().toISOString();saveDB(x);v5CloudUpsert(r)}v5RenderCompanion();renderHistory()};
+const v5BaseDelete=window.deleteRecord;window.deleteRecord=function(id){const exists=db().records.find(r=>r.id===id);if(typeof v5BaseDelete==='function')v5BaseDelete(id);if(exists)v5CloudDelete(id);v5RenderCompanion();renderHistory()};
+const v5BaseSetLanguage=setLanguage;setLanguage=function(lang){v5BaseSetLanguage(lang);v5RefreshAuthText();v5CloudStatus();v5RenderCompanion();v5PopulateHistoryFilters();renderHistory()};window.setLanguage=setLanguage;
+const v5BaseShow=show;show=function(view){v5BaseShow(view);if(view==='homeView')v5RenderCompanion();if(view==='historyView'){v5PopulateHistoryFilters();renderHistory()}};
+// Backward-compatible V4 records remain readable; V5 only enriches presentation and optional cloud sync.
+setTimeout(()=>{v5RenderCompanion();v5PopulateHistoryFilters();v5CloudStatus();v5InitCloud();},0);
 
 // ===== V5.2 FINAL TOOL EXPERIENCE PATCH =====
 let V52_STEP=0;
@@ -633,7 +635,7 @@ function v53RefreshLabels(){
  const b=document.getElementById('backHome');if(b)b.textContent=en?'← Toolbox Home':'← 工具首页';
  const h=document.getElementById('v53HistoryBtn');if(h)h.textContent=en?'📖 My Growth Journal':'📖 我的成长记录';
  const n=document.getElementById('v53NavNotice');if(n)n.textContent=en?'If you have used this tool before, your past entries appear below under “Your past reflections.” Sign in to your member account to bring cloud records back on this device.':'如果你以前用过这个工具，旧记录会显示在下面的「以前的我写过什么？」；登录会员账号后，也会从云端带回来。';
- const v=document.getElementById('v53Version');if(v)v.textContent='V5.4 · CLICK FIX + GUIDED HISTORY';
+ const v=document.getElementById('v53Version');if(v)v.textContent='V5.5 · TOOL OPEN FIX + GUIDED HISTORY';
 }
 const v53PrevSetLanguage=setLanguage;
 setLanguage=function(lang){v53PrevSetLanguage(lang);v53RefreshLabels();renderTools();if(selectedTool&&document.getElementById('toolView')?.classList.contains('active')){const r=editingRecordId?db().records.find(x=>x.id===editingRecordId):null;v53RenderToolForm(r)}};window.setLanguage=setLanguage;
@@ -687,7 +689,7 @@ setTimeout(()=>{const p=new URLSearchParams(location.search),tool=p.get('tool');
       setTimeout(()=>{const el=q('toolView');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},40);
     }catch(err){
       console.error('V5.4 open tool error',err);
-      alert((typeof LANG!=='undefined'&&LANG==='en')?'This tool could not open. Please refresh the page and try again.':'这个工具暂时无法打开，请刷新页面后再试。');
+      alert((typeof LANG!=='undefined'&&LANG==='en')?'This tool could not open. Please refresh once. If it still fails, contact support.':'这个工具暂时无法打开。请刷新一次；如果仍然无法打开，请联系课程方。');
     }
   };
   try{ openTool=window.v54OpenTool; }catch(e){}
@@ -768,7 +770,7 @@ setTimeout(()=>{const p=new URLSearchParams(location.search),tool=p.get('tool');
     renderTools();v4RenderNeedQuick();renderScenarioCards();
     const h=q('backHome');if(h){h.removeAttribute('onclick');h.dataset.v54Home='1';}
     const j=q('v53HistoryBtn');if(j){j.removeAttribute('onclick');j.dataset.v54History='all';}
-    const ver=q('v53Version');if(ver)ver.textContent='V5.4 · CLICK FIX + GUIDED HISTORY';
+    const ver=q('v53Version');if(ver)ver.textContent='V5.5 · TOOL OPEN FIX + GUIDED HISTORY';
     if(selectedTool&&q('toolView')?.classList.contains('active')){
       const r=editingRecordId?db().records.find(x=>x.id===editingRecordId):null;
       if(typeof v53RenderToolForm==='function')v53RenderToolForm(r);
@@ -776,8 +778,8 @@ setTimeout(()=>{const p=new URLSearchParams(location.search),tool=p.get('tool');
   };
 
   renderTools();v4RenderNeedQuick();renderScenarioCards();
-  const ver=q('v53Version');if(ver)ver.textContent='V5.4 · CLICK FIX + GUIDED HISTORY';
-  const footer=q('footerText');if(footer)footer.innerHTML=LANG==='en'?'🌱 Planting Happiness | My Happiness Companion · V5.4<br/>A better life can begin with one small decision.':'🌱 播种幸福｜我的幸福陪伴系统 · V5.4<br/>更好的自己，从一个小小的决定开始。';
+  const ver=q('v53Version');if(ver)ver.textContent='V5.5 · TOOL OPEN FIX + GUIDED HISTORY';
+  const footer=q('footerText');if(footer)footer.innerHTML=LANG==='en'?'🌱 Planting Happiness | My Happiness Companion · V5.5<br/>A better life can begin with one small decision.':'🌱 播种幸福｜我的幸福陪伴系统 · V5.5<br/>更好的自己，从一个小小的决定开始。';
 })();
 </script>
 
