@@ -136,6 +136,18 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
     margin-bottom:3px;
   }
 }
+
+/* ===== V5.2 guided, non-empty tool experience ===== */
+.v52Intro{background:linear-gradient(145deg,#f8fbf5,#fffaf1);border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0}
+.v52Intro h3{margin:0 0 7px;color:var(--green);font-size:18px}.v52Intro p{margin:0;line-height:1.65;color:#566158}
+.v52Past{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin:14px 0}.v52PastTop{display:flex;align-items:center;justify-content:space-between;gap:10px}.v52Past h3{margin:0;color:var(--green);font-size:17px}.v52PastList{display:grid;gap:9px;margin-top:10px}.v52PastItem{background:var(--sage2);border-radius:13px;padding:11px}.v52PastItem b{display:block;color:var(--green);font-size:12px;margin-bottom:4px}.v52PastItem p{margin:0;line-height:1.55}.v52PastSeed{margin-top:6px;color:#47644f;font-size:12px}.v52Empty{font-size:13px;color:var(--muted);line-height:1.55;margin-top:9px}
+.v52Example{background:#fff7e8;border:1px solid #ead9b7;border-radius:18px;padding:15px;margin:14px 0}.v52Example h3{margin:0 0 7px;color:#6f5b36;font-size:17px}.v52Example p{margin:0 0 8px;line-height:1.6}.v52Example details{margin-top:8px}.v52Example summary{cursor:pointer;font-weight:800;color:#6f5b36}
+.v52Stepper{margin-top:16px}.v52StepHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.v52StepHead strong{color:var(--green)}.v52StepDots{display:flex;gap:5px;flex-wrap:wrap}.v52Dot{width:8px;height:8px;border-radius:999px;background:#d8e0d5}.v52Dot.on{width:20px;background:var(--green)}
+.v52Field{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.v52Field.on{display:block}.v52Field>label{display:block;font-weight:900;color:var(--green);font-size:18px;line-height:1.45;margin:0 0 9px}.v52Hint{font-size:12px;color:var(--muted);margin:-2px 0 10px;line-height:1.55}
+.v52Field textarea{min-height:82px!important;height:82px;resize:vertical}.v52Field input[type=text]{min-height:46px}.v52Nav{display:flex;gap:8px;justify-content:space-between;margin-top:12px;flex-wrap:wrap}.v52Nav .btn{min-width:120px}.v52SaveRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.v52DateRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px}.v52DateRow label{font-weight:800;color:var(--green)}.v52DateRow input{max-width:210px}
+.v52ReviewLink{border:0;background:transparent;color:var(--green);font-weight:900;text-decoration:underline;padding:0;cursor:pointer}
+@media(max-width:600px){.v52Field{padding:14px}.v52Field>label{font-size:17px}.v52Field textarea{min-height:74px!important;height:74px}.v52Nav .btn{flex:1;min-width:0}.v52PastTop{align-items:flex-start;flex-direction:column}}
+
 </style>
 
 <style>
@@ -154,7 +166,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 </style>
 
 <style>
-/* ===== V5.1 VISIBLE COMPANION EXPERIENCE ===== */
+/* ===== V5.2 VISIBLE COMPANION EXPERIENCE ===== */
 .v51CompanionTop{max-width:1100px;margin:14px auto 0;padding:0 0}.v51CompanionTop .v5Companion{margin:0;border:1px solid #cddbc9;background:linear-gradient(145deg,#fffdf8,#edf5e9);box-shadow:0 12px 30px rgba(53,90,66,.08)}
 .v51Why{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0 0}.v51Why>div{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px}.v51Why b{display:block;color:var(--green);margin-bottom:4px}.v51Why span{font-size:12px;line-height:1.5;color:var(--muted)}
 .v51SectionTitle{margin:18px 0 7px;color:var(--green);font-size:15px;font-weight:900}.v51ToolDivider{margin:20px 0 8px;border-top:1px dashed #cfdacb;padding-top:16px;color:var(--green);font-size:13px;font-weight:900}
@@ -215,7 +227,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 <section class="view" id="gardenView"><div class="card"><h2 id="gardenTitle">🌷 我的幸福花园</h2><div class="sub" id="gardenSub">任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。</div><div class="garden"><div class="gardenmsg" id="gardenMsg"></div><div class="stagelegend" id="stageLegend"></div><div class="gardengrid" id="gardenGrid"></div></div></div></section>
 <section class="view" id="historyView"><div class="card"><h2 id="historyTitle">📚 全部幸福记录</h2><div class="sub" id="historySub">这里会汇总你使用13项工具保存过的记录。</div><div class="notice" id="historyNotice" style="margin:12px 0"></div><div class="v5HistoryTools"><select id="v5HistoryFilter"></select><input id="v5HistorySearch" type="search" placeholder="搜索以前写过的内容…"></div><div id="allHistory" class="v5Timeline"></div></div></section>
 <section class="view" id="certificateView"><div class="card"><h2 id="certTitle">🏆 21天完成证书</h2><div class="sub" id="certSub">满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。</div><label id="certNameLabel">学员姓名</label><input id="certName" placeholder="请输入姓名"/><div class="btnrow"><button class="btn primary" id="buildCert">生成 / 更新证书</button><button class="btn secondary" id="printCert">打印 / 存成 PDF</button></div><div class="status" id="certStatus"></div><div id="certificateBox" style="margin-top:16px"></div></div></section>
-<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.1<br/>更好的自己，从一个小小的决定开始。</div>
+<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.2<br/>更好的自己，从一个小小的决定开始。</div>
 </div>
 
 <div class="v5AuthModal" id="v5AuthModal" role="dialog" aria-modal="true">
@@ -250,7 +262,7 @@ const UI={
  gardenTitle:bi('🌷 我的幸福花园','🌷 My Happiness Garden'),gardenSub:bi('任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。','Complete and save any tool to count that date as one practice day. Each calendar day counts once.'),
  historyTitle:bi('📖 我的幸福成长记录','📖 My Happiness Growth Journal'),historySub:bi('这里不是资料仓库，而是让你回看：以前发生了什么、我当时怎样想、播下什么种子，以及后来怎样。','This is not just a storage page. It lets you look back at what happened, how you responded, what seed you chose, and what happened afterwards.'),historyNotice:bi('☁️ 登录会员账号后，这里的成长记录会同步到云端；JSON 导出仍可作为额外备份。','☁️ After member sign-in, your growth journal syncs to the cloud. JSON export remains available as an extra backup.'),
  certTitle:bi('🏆 21天完成证书','🏆 21-Day Completion Certificate'),certSub:bi('满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。','After at least 21 different practice days, you can generate your completion certificate. Before that, you can still preview it.'), certName:bi('学员姓名','Participant Name'), certPlaceholder:bi('请输入姓名','Enter your name'), buildCert:bi('生成 / 更新证书','Generate / Update Certificate'), printCert:bi('打印 / 存成 PDF','Print / Save as PDF'),
- footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.1<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.1<br/>Notice yourself · Choose again · Plant one seed at a time'),
+ footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.2<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.2<br/>Notice yourself · Choose again · Plant one seed at a time'),
  openTool:bi('打开工具 →','Open Tool →'), viewCert:bi('查看证书','View Certificate'), date:bi('日期','Date'), save:bi('保存这份记录','Save This Record'), update:bi('更新这份记录','Update This Record'), clear:bi('清空','Clear'), editing:bi('正在编辑已保存的记录。','Editing a saved record.'), edit:bi('编辑','Edit'), del:bi('删除','Delete'),
  noRecords:bi('🌿 还没有记录。先从一个最需要的工具开始吧。','🌿 No records yet. Start with the tool you need most today.'), startPractice:bi('开始这个练习 →','Start This Practice →'), recommended:bi('👉 建议使用：','👉 Recommended tool: ')
 };
@@ -461,5 +473,84 @@ $('resetAll').onclick=()=>{if(!confirm(LANG==='en'?'Clear all Demo records saved
 function renderScenarioCards(){$('scenarioCards').innerHTML=Object.entries(SCENARIOS).map(([id,s])=>`<article class="scenario-card"><div class="sym">${s.icon}</div><h3>${s.code}｜${L(s.title)}</h3><p>${L(s.desc)}</p><button class="btn primary" onclick="showScenario('${id}')" style="width:100%">${LANG==='en'?'See what I can do now':'看看我现在可以怎么做'}</button></article>`).join('')}
 window.showScenario=id=>{const s=SCENARIOS[id];if(!s)return;const tool=toolObj(s.tool);$('scenarioGuide').innerHTML=`<div class="guidebox"><h3>${s.icon} ${s.code}｜${L(s.title)}</h3><p>${L(s.intro)}</p><ul class="questions">${s.qs.map(q=>`<li>${L(q)}</li>`).join('')}</ul><div class="recommend">${L(UI.recommended)}${tool.icon} ${L(tool.name)}</div><div class="btnrow"><button class="btn primary" onclick="openTool('${s.tool}')">${L(UI.startPractice)}</button></div></div>`;$('scenarioGuide').scrollIntoView({behavior:'smooth',block:'start'})};
 renderStatic();renderTools();refreshStats();renderProgress();renderGarden();renderHistory();renderCertificate();
+
+
+// ===== V5.2 FINAL TOOL EXPERIENCE PATCH =====
+let V52_STEP=0;
+function v52ToolRecords(tool){return [...db().records].filter(r=>r&&r.tool===tool).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id)}
+function v52PastBlock(tool){
+  const en=LANG==='en', arr=v52ToolRecords(tool).slice(0,3);
+  if(!arr.length){
+    return `<div class="v52Past"><div class="v52PastTop"><h3>${en?'📖 Your past reflections':'📖 以前的我写过什么？'}</h3></div><div class="v52Empty">${en?'This is your first saved reflection for this tool. After you save today, it will appear here the next time you return.':'这是你第一次使用这个工具。今天保存以后，下次回来就会在这里看见以前写过的自己。'}</div></div>`;
+  }
+  return `<div class="v52Past"><div class="v52PastTop"><h3>${en?'📖 Your past reflections':'📖 以前的我写过什么？'}</h3><button class="v52ReviewLink" type="button" onclick="v5OpenTopicHistory('${tool}')">${en?'View all records →':'查看全部记录 →'}</button></div><div class="v52PastList">${arr.map(r=>{const key=v5KeyText(r),seed=v4ActionForRecord(r);return `<div class="v52PastItem"><b>${esc(r.date)} · ${v5FollowLabel(r.followup)}</b><p>${esc(v4Short(key||v4CoachResponse(r.tool,r.data||{}).body,150))}</p>${seed?`<div class="v52PastSeed">🌱 ${esc(v4Short(seed,120))}</div>`:''}</div>`}).join('')}</div></div>`;
+}
+function v52ExampleBlock(tool){
+  const en=LANG==='en';
+  return `<div class="v52Example"><h3>${en?'💡 See an example before you write':'💡 先看一个例子，再写自己的情况'}</h3><p><b>${en?'When this tool is useful:':'什么时候适合用：'}</b> ${L(V5_EXAMPLES[tool])}</p><p>${L(V5_STORIES[tool])}</p><details><summary>${en?'Why start with an example?':'为什么先看例子？'}</summary><p>${en?'Because habits and automatic reactions can be hard to notice while they are happening. The example is not a correct answer; it simply helps you recognise your own pattern before writing.':'因为很多习惯和自动反应发生得太快，我们当下不一定察觉。例子不是标准答案，只是先帮助你认出自己的模式，再写自己的情况。'}</p></details></div>`;
+}
+function v52FieldHint(tool,id){
+ const en=LANG==='en';
+ const hints={
+  happen:bi('只写摄像机拍得到的事实，先不要解释谁对谁错。','Write only what a camera could observe first, without deciding who was right or wrong.'),
+  fact:bi('先写发生了什么，不急着判断对方的动机。','Write what happened first, before judging the other person’s intention.'),
+  feel:bi('可以写：生气、害怕、委屈、失望、紧张、很累……','Examples: angry, afraid, hurt, disappointed, tense, exhausted…'),
+  feeling:bi('可以写：生气、害怕、委屈、失望、紧张、很累……','Examples: angry, afraid, hurt, disappointed, tense, exhausted…'),
+  need:bi('例如：被听见、安全感、休息、清楚答案、界限、支持。','Examples: to be heard, safety, rest, clarity, boundaries, support.'),
+  control:bi('只写你现在真正能够影响的部分。','Write only what is genuinely within your influence right now.'),
+  step:bi('把动作缩小到今天或接下来10分钟做得到。','Make the action small enough to do today or in the next 10 minutes.'),
+  talk:bi('不需要写得完美，只写你想怎样更清楚地表达。','It does not need to sound perfect; write how you want to communicate more clearly.'),
+  worry:bi('把“我很担心”写成更具体的一句话。','Turn “I am worried” into one more specific sentence.'),
+  action:bi('选择一个现实、可执行、可观察的小动作。','Choose one realistic, observable next action.'),
+  thought:bi('写下脑中最常重复的那句话，即使它听起来不理性也可以。','Write the sentence that keeps repeating in your mind, even if it sounds irrational.'),
+  rewrite:bi('不是强迫正能量，而是写得更准确、更有帮助。','Do not force positivity; make the sentence more accurate and more useful.'),
+  decision:bi('先写你现在愿意尝试的选择，不需要保证永远正确。','Write the choice you are willing to try now; it does not need to be perfect forever.')
+ };
+ return hints[id]?L(hints[id]):(en?'Write what is true for you. There is no perfect answer.':'写真实的就好，没有标准答案。');
+}
+function v52RenderField(f,idx,total){
+ const [id,label,type]=f;
+ return `<div class="v52Field ${idx===0?'on':''}" data-v52-step="${idx}"><label>${L(label)}</label><div class="v52Hint">${v52FieldHint(selectedTool,id)}</div>${renderField(f)}<div class="v52Nav"><button class="btn secondary" type="button" onclick="v52Prev()" ${idx===0?'disabled':''}>${LANG==='en'?'← Previous':'← 上一题'}</button>${idx<total-1?`<button class="btn primary" type="button" onclick="v52Next()">${LANG==='en'?'Next →':'下一题 →'}</button>`:`<span></span>`}</div></div>`;
+}
+function v52RefreshSteps(){
+ const fields=[...document.querySelectorAll('#toolContent .v52Field')];
+ if(!fields.length)return;
+ V52_STEP=Math.max(0,Math.min(V52_STEP,fields.length-1));
+ fields.forEach((x,i)=>x.classList.toggle('on',i===V52_STEP));
+ const dots=document.querySelectorAll('#toolContent .v52Dot');dots.forEach((d,i)=>d.classList.toggle('on',i===V52_STEP));
+ const count=document.getElementById('v52StepCount');if(count)count.textContent=(LANG==='en'?`Question ${V52_STEP+1} of ${fields.length}`:`第 ${V52_STEP+1} / ${fields.length} 题`);
+ fields[V52_STEP]?.scrollIntoView({behavior:'smooth',block:'center'});
+}
+window.v52Next=()=>{V52_STEP++;v52RefreshSteps()};window.v52Prev=()=>{V52_STEP--;v52RefreshSteps()};
+
+// Final override: this runs after all earlier V4/V5 code so the user never lands on a wall of blank fields.
+renderToolForm=function(existing=null){
+ const def=FORM_DEFS[selectedTool],en=LANG==='en';V52_STEP=0;
+ const fields=def.fields||[];
+ $('toolContent').innerHTML=`<h2>${L(def.title)}</h2><div class="sub">${L(def.sub)}</div>
+ <div class="v52Intro"><h3>${en?'🌿 We will do this one question at a time':'🌿 不需要一次填完，我们一题一题来'}</h3><p>${en?'First see an example and your past reflections. Then answer only the current question. The goal is not to write a perfect essay; it is to see one thing more clearly and choose one next step.':'先看例子，也看回以前的自己，然后一次只回答一个问题。目标不是写一篇很完整的文章，而是把一件事看清楚一点，再带走一个下一步。'}</p></div>
+ ${v52PastBlock(selectedTool)}
+ ${v52ExampleBlock(selectedTool)}
+ <div class="v52DateRow"><label>${L(UI.date)}</label><input id="recordDate" type="date" value="${existing?.date||today()}"></div>
+ <div class="v52Stepper"><div class="v52StepHead"><strong id="v52StepCount"></strong><div class="v52StepDots">${fields.map((_,i)=>`<span class="v52Dot ${i===0?'on':''}"></span>`).join('')}</div></div>${fields.map((f,i)=>v52RenderField(f,i,fields.length)).join('')}</div>
+ <div class="v52SaveRow"><button class="btn primary" id="saveTool">${editingRecordId?L(UI.update):L(UI.save)}</button><button class="btn secondary" id="clearTool">${L(UI.clear)}</button></div><div class="status" id="toolStatus">${editingRecordId?L(UI.editing):''}</div><div class="coachResult" id="toolCoachResult"></div>`;
+ document.querySelectorAll('[data-mood]').forEach(b=>b.onclick=()=>{moodValue=Number(b.dataset.mood);document.querySelectorAll('[data-mood]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+ document.querySelectorAll('[data-chip]').forEach(b=>b.onclick=()=>{chipValue=b.dataset.chip;document.querySelectorAll('[data-chip]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+ document.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{mapValues[b.dataset.range]=Number(b.dataset.val);document.querySelectorAll(`[data-range="${b.dataset.range}"]`).forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+ if(existing){
+   fields.forEach(([id,label,type])=>{const v=existing.data?.[id];if(type==='mood'){moodValue=Number(v||0);document.querySelectorAll('[data-mood]').forEach(x=>x.classList.toggle('sel',Number(x.dataset.mood)===moodValue))}else if(type==='chips'){chipValue=normalizeChip(v);document.querySelectorAll('[data-chip]').forEach(x=>x.classList.toggle('sel',x.dataset.chip===chipValue))}else if(type==='range'){mapValues[id]=Number(v||0);document.querySelectorAll(`[data-range="${id}"]`).forEach(x=>x.classList.toggle('sel',Number(x.dataset.val)===mapValues[id]))}else if($('f_'+id))$('f_'+id).value=v||''});
+ }
+ $('saveTool').onclick=saveToolRecord;
+ $('clearTool').onclick=()=>{moodValue=0;chipValue='';mapValues={};editingRecordId=null;renderToolForm()};
+ v52RefreshSteps();
+};
+
+// After cloud records arrive, immediately refresh the open tool so past reflections appear without reopening it.
+const v52BaseCloudMerge=v5CloudMerge;
+v5CloudMerge=async function(){await v52BaseCloudMerge();if(selectedTool&&$('toolView')?.classList.contains('active')){const ex=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(ex)}};
+
+// Ensure the visible version and companion view refresh after the final patch.
+setTimeout(()=>{if(selectedTool&&$('toolView')?.classList.contains('active')){const ex=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(ex)}v5RenderCompanion();renderHistory();},0);
+
 </script>
 </body></html>
