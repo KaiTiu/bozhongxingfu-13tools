@@ -156,6 +156,8 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 .v53ToolNav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.v53ToolNav .btn{flex:0 0 auto}
 .v53NavNotice{background:#edf3ea;border:1px solid #dbe7d8;border-radius:14px;padding:11px 13px;margin:10px 0 14px;color:#355a42;font-size:13px;line-height:1.55}
 @media(max-width:600px){.v53ToolNav{display:grid;grid-template-columns:1fr 1fr}.v53ToolNav .btn{width:100%}}
+
+#needNowTitle{scroll-margin-top:18px}
 </style>
 
 <style>
@@ -780,6 +782,70 @@ setTimeout(()=>{const p=new URLSearchParams(location.search),tool=p.get('tool');
   renderTools();v4RenderNeedQuick();renderScenarioCards();
   const ver=q('v53Version');if(ver)ver.textContent='V5.5 · TOOL OPEN FIX + GUIDED HISTORY';
   const footer=q('footerText');if(footer)footer.innerHTML=LANG==='en'?'🌱 Planting Happiness | My Happiness Companion · V5.5<br/>A better life can begin with one small decision.':'🌱 播种幸福｜我的幸福陪伴系统 · V5.5<br/>更好的自己，从一个小小的决定开始。';
+})();
+</script>
+
+
+<script>
+// ===== V5.6 NAV SCROLL + DUPLICATE LABEL FIX =====
+(function(){
+  // Build only the input control here. The guided wrapper already renders the field label once.
+  window.v56FieldControl=function(f){
+    const [id,label,type,opts]=f;
+    if(type==='textarea')return `<textarea id="f_${id}"></textarea>`;
+    if(type==='text')return `<input id="f_${id}" type="text">`;
+    if(type==='mood')return `<div class="moods">${[1,2,3,4,5].map((n,i)=>`<button type="button" class="mood" data-mood="${n}"><span>${['😔','🙁','😐','🙂','😊'][i]}</span>${n}</button>`).join('')}</div>`;
+    if(type==='chips')return `<div class="chips">${(opts||[]).map(([v,lab])=>`<button type="button" class="chip" data-chip="${v}">${L(lab)}</button>`).join('')}</div>`;
+    if(type==='range')return `<div class="rangegrid">${[1,2,3,4,5].map(n=>`<button type="button" class="rangebtn" data-range="${id}" data-val="${n}">${n}</button>`).join('')}</div>`;
+    return '';
+  };
+
+  // Override the guided field renderer so each question title appears exactly once in both languages.
+  v52RenderField=function(f,idx,total){
+    const [id,label]=f;
+    return `<div class="v52Field ${idx===0?'on':''}" data-v52-step="${idx}"><label>${L(label)}</label><div class="v52Hint">${v52FieldHint(selectedTool,id)}</div>${window.v56FieldControl(f)}<div class="v52Nav"><button class="btn secondary" type="button" onclick="v52Prev()" ${idx===0?'disabled':''}>${LANG==='en'?'← Previous':'← 上一题'}</button>${idx<total-1?`<button class="btn primary" type="button" onclick="v52Next()">${LANG==='en'?'Next →':'下一题 →'}</button>`:`<span></span>`}</div></div>`;
+  };
+  window.v52RenderField=v52RenderField;
+
+  function scrollMyToday(){
+    const target=document.getElementById('needNowTitle') || document.getElementById('homeView');
+    if(target)setTimeout(()=>target.scrollIntoView({behavior:'smooth',block:'start'}),60);
+  }
+
+  // Make "My Today / 我的今天" behave like a real shortcut to today's action area.
+  const navHome=document.getElementById('navHome');
+  if(navHome){
+    navHome.onclick=function(ev){
+      ev.preventDefault();
+      if(typeof v53ShowView==='function')v53ShowView('homeView');
+      else if(typeof show==='function')show('homeView');
+      scrollMyToday();
+    };
+  }
+
+  // Also keep delegated/click re-renders from replacing the special home behaviour after language changes.
+  const oldSetLanguage=window.setLanguage;
+  window.setLanguage=function(lang){
+    if(typeof oldSetLanguage==='function')oldSetLanguage(lang);
+    const h=document.getElementById('navHome');
+    if(h){
+      h.onclick=function(ev){
+        ev.preventDefault();
+        if(typeof v53ShowView==='function')v53ShowView('homeView');
+        else if(typeof show==='function')show('homeView');
+        scrollMyToday();
+      };
+    }
+    const ver=document.getElementById('v53Version');
+    if(ver)ver.textContent='V5.6 · NAV SCROLL + CLEAN QUESTIONS';
+    const footer=document.getElementById('footerText');
+    if(footer)footer.innerHTML=LANG==='en'?'🌱 Planting Happiness | My Happiness Companion · V5.6<br/>A better life can begin with one small decision.':'🌱 播种幸福｜我的幸福陪伴系统 · V5.6<br/>更好的自己，从一个小小的决定开始。';
+  };
+
+  const ver=document.getElementById('v53Version');
+  if(ver)ver.textContent='V5.6 · NAV SCROLL + CLEAN QUESTIONS';
+  const footer=document.getElementById('footerText');
+  if(footer)footer.innerHTML=LANG==='en'?'🌱 Planting Happiness | My Happiness Companion · V5.6<br/>A better life can begin with one small decision.':'🌱 播种幸福｜我的幸福陪伴系统 · V5.6<br/>更好的自己，从一个小小的决定开始。';
 })();
 </script>
 
