@@ -276,7 +276,8 @@ function renderStatic(){
  $('stageLegend').innerHTML=[['🌰',bi('第1–2天<br/>种子','Days 1–2<br/>Seed')],['🌱',bi('第3–7天<br/>发芽','Days 3–7<br/>Sprout')],['🌿',bi('第8–15天<br/>成长','Days 8–15<br/>Growth')],['🪻',bi('第16–20天<br/>花苞','Days 16–20<br/>Bud')],['🌷',bi('第21–29天<br/>开花','Days 21–29<br/>Bloom')],['🌳',bi('第30天<br/>幸福花园','Day 30<br/>Happiness Garden')]].map(([i,x])=>`<div class="stageitem"><span>${i}</span>${L(x)}</div>`).join('');
  renderScenarioCards();
 }
-function setLanguage(lang){LANG=lang==='en'?'en':'zh';localStorage.setItem(LANG_KEY,LANG);const u=new URL(location.href);u.searchParams.set('lang',LANG);history.replaceState(null,'',u);// ===== V4 LIFE-USEFUL TOOLBOX =====
+function setLanguage(lang){LANG=lang==='en'?'en':'zh';localStorage.setItem(LANG_KEY,LANG);const u=new URL(location.href);u.searchParams.set('lang',LANG);history.replaceState(null,'',u);renderStatic();renderTools();refreshStats();renderProgress();renderGarden();renderHistory();renderCertificate();if(selectedTool&&$('toolView').classList.contains('active')){const existing=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(existing)} if($('scenarioGuide').innerHTML)$('scenarioGuide').innerHTML='';}
+// ===== V4 LIFE-USEFUL TOOLBOX =====
 const V4_NEEDS=['emotion','relationship','money','career','habit','choice','overthink','okay'];
 function v4RenderNeedQuick(){const g=$('needQuickGrid');if(!g)return;const en=LANG==='en';$('needNowTitle').textContent=en?'What is happening today?':'今天发生什么了？';$('needNowLead').textContent=en?'Do not study all 13 tools first. Choose what feels closest and I will take you directly to a useful practice.':'不用先研究13个工具。先选最接近你现在的情况，我会直接带你去适合的练习。';g.innerHTML=V4_NEEDS.map(id=>{const s=SCENARIOS[id];return `<button class="needBtn" onclick="v4OpenNeed('${id}')">${s.icon} ${L(s.title)}</button>`}).join('')}
 window.v4OpenNeed=id=>{show('scenarioView');setTimeout(()=>showScenario(id),40)};
@@ -309,7 +310,7 @@ const v4BaseSetLanguage=setLanguage;setLanguage=function(lang){v4BaseSetLanguage
 const v4BaseShow=show;show=function(view){v4BaseShow(view);if(view==='homeView')v4RenderFollowup()};
 function v4AutoOpen(){const p=new URLSearchParams(location.search),tool=p.get('tool');if(tool&&FORM_DEFS[tool])setTimeout(()=>openTool(tool),80)}
 
-renderStatic();renderTools();refreshStats();renderProgress();renderGarden();renderHistory();renderCertificate();v4RenderNeedQuick();v4RenderFollowup();v4AutoOpen();if(selectedTool&&$('toolView').classList.contains('active')){const existing=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(existing)} if($('scenarioGuide').innerHTML)$('scenarioGuide').innerHTML='';}
+
 window.setLanguage=setLanguage;
 function openGuide(){window.location.href='guide.html?lang='+encodeURIComponent(LANG)}
 function returnToCourse(){const params=new URLSearchParams(location.search),target=params.get('return');if(target){try{const u=new URL(target);u.searchParams.set('lang',LANG);if(u.protocol==='https:'||u.protocol==='http:'){location.href=u.href;return}}catch(e){}} if(document.referrer&&!document.referrer.includes('bozhongxingfu-13tools.vercel.app')){location.href=document.referrer;return} if(history.length>1){history.back();return} alert(LANG==='en'?'The 21-day course entry could not be found. Please reopen the toolbox from the 21-day course.':'找不到21天课程入口。请从21天课程里的「13项幸福工具箱」按钮重新进入一次。')}
