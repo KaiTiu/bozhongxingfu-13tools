@@ -3,9 +3,12 @@
 <html lang="zh-Hans">
 <head>
 <meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#355a42" name="theme-color"/>
-<title>播种幸福｜13项幸福人生工具箱 Web App</title>
+<title>播种幸福｜我的幸福陪伴系统 V5.3</title>
 <style>
 :root{
   --bg:#f6f1e7;--card:#fffdf8;--green:#355a42;--green2:#54735d;--sage:#dfe9db;
@@ -148,6 +151,11 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 .v52ReviewLink{border:0;background:transparent;color:var(--green);font-weight:900;text-decoration:underline;padding:0;cursor:pointer}
 @media(max-width:600px){.v52Field{padding:14px}.v52Field>label{font-size:17px}.v52Field textarea{min-height:74px!important;height:74px}.v52Nav .btn{flex:1;min-width:0}.v52PastTop{align-items:flex-start;flex-direction:column}}
 
+
+.v53Version{display:inline-flex;margin-top:10px;padding:5px 9px;border-radius:999px;background:#ffffff18;border:1px solid #ffffff33;color:#fff;font-size:11px;font-weight:900;letter-spacing:.4px}
+.v53ToolNav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.v53ToolNav .btn{flex:0 0 auto}
+.v53NavNotice{background:#edf3ea;border:1px solid #dbe7d8;border-radius:14px;padding:11px 13px;margin:10px 0 14px;color:#355a42;font-size:13px;line-height:1.55}
+@media(max-width:600px){.v53ToolNav{display:grid;grid-template-columns:1fr 1fr}.v53ToolNav .btn{width:100%}}
 </style>
 
 <style>
@@ -199,7 +207,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
     <input accept=".json,application/json" id="backupFile" style="display:none" type="file"/>
     <button id="resetAll">🧹 清除当前资料</button>
   </div>
-  <div class="v5CloudBar"><span class="v5CloudPill local" id="v5CloudStatus">💻 目前保存在这台设备</span></div>
+  <div class="v5CloudBar"><span class="v5CloudPill local" id="v5CloudStatus">💻 目前保存在这台设备</span></div><div class="v53Version" id="v53Version">V5.3 · GUIDED + HISTORY</div>
 </section>
 <section class="v51CompanionTop"><div class="v5Companion" id="v5Companion"></div></section>
 <div class="stats">
@@ -218,7 +226,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 </div>
 <section class="view active" id="homeView"><div class="card"><h2 id="homeTitle">🧰 选择今天最需要的工具</h2><div class="sub" id="homeSub">不需要一次做完13项。点击任何一个工具就可以直接开始。</div><div class="followCard" id="coachFollowUp"></div><div class="assistantEntry"><h3 id="needNowTitle">今天发生什么了？</h3><p id="needNowLead">不用先研究13个工具。先选最接近你现在的情况，我会直接带你去适合的练习。</p><div class="needGrid" id="needQuickGrid"></div></div><div class="v51ToolDivider" id="v51AllToolsTitle">如果你已经知道自己需要什么，也可以直接选择工具：</div><div class="toolgrid" id="toolGrid"></div></div></section>
 <section class="view" id="scenarioView"><div class="card"><h2 id="scenarioTitle">🧭 我现在最需要什么帮助？</h2><div class="sub" id="scenarioSub">如果你不知道该使用哪一个工具，可以先从现在的状态开始。选择最接近你目前情况的一项。</div><div class="scenario-grid" id="scenarioCards"></div><div id="scenarioGuide"></div></div></section>
-<section class="view" id="toolView"><div class="card"><div class="btnrow" style="margin-top:0"><button class="btn ghost" id="backHome">← 返回工具箱</button></div><div id="toolContent"></div></div></section>
+<section class="view" id="toolView"><div class="card"><div class="v53ToolNav"><button class="btn ghost" id="backHome" type="button" onclick="v53GoHome()">← 工具首页</button><button class="btn secondary" id="v53HistoryBtn" type="button" onclick="v53GoHistory()">📖 我的成长记录</button></div><div class="v53NavNotice" id="v53NavNotice">如果你以前用过这个工具，旧记录会显示在下面的「以前的我写过什么？」；登录会员账号后，也会从云端带回来。</div><div id="toolContent"></div></div></section>
 <section class="view" id="progressView"><div class="card"><h2 id="progressTitle">📊 我的幸福进度</h2><div class="sub" id="progressSub">不是追求完美，而是看见自己愿意持续的每一天。</div>
   <div class="progressrow"><div class="progresshead"><span id="p7Label">🌱 7天幸福挑战</span><span id="p7t">0 / 7</span></div><div class="progress"><div id="p7b" style="width:0"></div></div></div>
   <div class="progressrow"><div class="progresshead"><span id="p21Label">🌿 21天幸福实践</span><span id="p21t">0 / 21</span></div><div class="progress"><div id="p21b" style="width:0"></div></div></div>
@@ -227,7 +235,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 <section class="view" id="gardenView"><div class="card"><h2 id="gardenTitle">🌷 我的幸福花园</h2><div class="sub" id="gardenSub">任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。</div><div class="garden"><div class="gardenmsg" id="gardenMsg"></div><div class="stagelegend" id="stageLegend"></div><div class="gardengrid" id="gardenGrid"></div></div></div></section>
 <section class="view" id="historyView"><div class="card"><h2 id="historyTitle">📚 全部幸福记录</h2><div class="sub" id="historySub">这里会汇总你使用13项工具保存过的记录。</div><div class="notice" id="historyNotice" style="margin:12px 0"></div><div class="v5HistoryTools"><select id="v5HistoryFilter"></select><input id="v5HistorySearch" type="search" placeholder="搜索以前写过的内容…"></div><div id="allHistory" class="v5Timeline"></div></div></section>
 <section class="view" id="certificateView"><div class="card"><h2 id="certTitle">🏆 21天完成证书</h2><div class="sub" id="certSub">满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。</div><label id="certNameLabel">学员姓名</label><input id="certName" placeholder="请输入姓名"/><div class="btnrow"><button class="btn primary" id="buildCert">生成 / 更新证书</button><button class="btn secondary" id="printCert">打印 / 存成 PDF</button></div><div class="status" id="certStatus"></div><div id="certificateBox" style="margin-top:16px"></div></div></section>
-<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.2<br/>更好的自己，从一个小小的决定开始。</div>
+<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.3<br/>更好的自己，从一个小小的决定开始。</div>
 </div>
 
 <div class="v5AuthModal" id="v5AuthModal" role="dialog" aria-modal="true">
@@ -262,7 +270,7 @@ const UI={
  gardenTitle:bi('🌷 我的幸福花园','🌷 My Happiness Garden'),gardenSub:bi('任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。','Complete and save any tool to count that date as one practice day. Each calendar day counts once.'),
  historyTitle:bi('📖 我的幸福成长记录','📖 My Happiness Growth Journal'),historySub:bi('这里不是资料仓库，而是让你回看：以前发生了什么、我当时怎样想、播下什么种子，以及后来怎样。','This is not just a storage page. It lets you look back at what happened, how you responded, what seed you chose, and what happened afterwards.'),historyNotice:bi('☁️ 登录会员账号后，这里的成长记录会同步到云端；JSON 导出仍可作为额外备份。','☁️ After member sign-in, your growth journal syncs to the cloud. JSON export remains available as an extra backup.'),
  certTitle:bi('🏆 21天完成证书','🏆 21-Day Completion Certificate'),certSub:bi('满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。','After at least 21 different practice days, you can generate your completion certificate. Before that, you can still preview it.'), certName:bi('学员姓名','Participant Name'), certPlaceholder:bi('请输入姓名','Enter your name'), buildCert:bi('生成 / 更新证书','Generate / Update Certificate'), printCert:bi('打印 / 存成 PDF','Print / Save as PDF'),
- footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.2<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.2<br/>Notice yourself · Choose again · Plant one seed at a time'),
+ footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.3<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.3<br/>Notice yourself · Choose again · Plant one seed at a time'),
  openTool:bi('打开工具 →','Open Tool →'), viewCert:bi('查看证书','View Certificate'), date:bi('日期','Date'), save:bi('保存这份记录','Save This Record'), update:bi('更新这份记录','Update This Record'), clear:bi('清空','Clear'), editing:bi('正在编辑已保存的记录。','Editing a saved record.'), edit:bi('编辑','Edit'), del:bi('删除','Delete'),
  noRecords:bi('🌿 还没有记录。先从一个最需要的工具开始吧。','🌿 No records yet. Start with the tool you need most today.'), startPractice:bi('开始这个练习 →','Start This Practice →'), recommended:bi('👉 建议使用：','👉 Recommended tool: ')
 };
@@ -552,5 +560,92 @@ v5CloudMerge=async function(){await v52BaseCloudMerge();if(selectedTool&&$('tool
 // Ensure the visible version and companion view refresh after the final patch.
 setTimeout(()=>{if(selectedTool&&$('toolView')?.classList.contains('active')){const ex=editingRecordId?db().records.find(r=>r.id===editingRecordId):null;renderToolForm(ex)}v5RenderCompanion();renderHistory();},0);
 
+
+// ===== V5.3 NAVIGATION + GUIDED HISTORY SAFETY PATCH =====
+// This final layer intentionally owns navigation and tool rendering so older V4/V5 handlers cannot leave the user on a blank-form screen.
+function v53ShowView(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const target=document.getElementById(view); if(!target)return;
+  target.classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+  if(view==='progressView')renderProgress();
+  if(view==='gardenView')renderGarden();
+  if(view==='historyView'){v5PopulateHistoryFilters();renderHistory()}
+  if(view==='certificateView')renderCertificate();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.v53ShowView=v53ShowView; show=v53ShowView; window.show=v53ShowView;
+window.v53GoHome=function(){v53ShowView('homeView');setTimeout(()=>{const x=document.getElementById('needQuickGrid');if(x)x.scrollIntoView({behavior:'smooth',block:'start'})},60)};
+window.v53GoHistory=function(tool){if(tool)V5_HISTORY_FILTER=tool;v53ShowView('historyView')};
+
+function v53RenderToolForm(existing=null){
+ const def=FORM_DEFS[selectedTool],en=LANG==='en';V52_STEP=0;
+ if(!def){v53GoHome();return}
+ const fields=def.fields||[];
+ $('toolContent').innerHTML=`<h2>${L(def.title)}</h2><div class="sub">${L(def.sub)}</div>
+ <div class="v52Intro"><h3>${en?'🌿 One question at a time':'🌿 一次只整理一个问题'}</h3><p>${en?'Start with your past reflections and a real-life example. Then answer only the current question. You are not writing an essay; you are trying to see one thing more clearly and choose one next step.':'先看回以前的自己，再看一个生活例子，然后一次只回答当前这一题。你不是在写作文，而是在把一件事看清楚一点，再带走一个下一步。'}</p></div>
+ ${v52PastBlock(selectedTool)}
+ ${v52ExampleBlock(selectedTool)}
+ <div class="v52DateRow"><label>${L(UI.date)}</label><input id="recordDate" type="date" value="${existing?.date||today()}"></div>
+ <div class="v52Stepper"><div class="v52StepHead"><strong id="v52StepCount"></strong><div class="v52StepDots">${fields.map((_,i)=>`<span class="v52Dot ${i===0?'on':''}"></span>`).join('')}</div></div>${fields.map((f,i)=>v52RenderField(f,i,fields.length)).join('')}</div>
+ <div class="v52SaveRow"><button class="btn primary" id="saveTool">${editingRecordId?L(UI.update):L(UI.save)}</button><button class="btn secondary" id="clearTool">${L(UI.clear)}</button></div><div class="status" id="toolStatus">${editingRecordId?L(UI.editing):''}</div><div class="coachResult" id="toolCoachResult"></div>`;
+ document.querySelectorAll('[data-mood]').forEach(b=>b.onclick=()=>{moodValue=Number(b.dataset.mood);document.querySelectorAll('[data-mood]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+ document.querySelectorAll('[data-chip]').forEach(b=>b.onclick=()=>{chipValue=b.dataset.chip;document.querySelectorAll('[data-chip]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+ document.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{mapValues[b.dataset.range]=Number(b.dataset.val);document.querySelectorAll(`[data-range="${b.dataset.range}"]`).forEach(x=>x.classList.remove('sel'));b.classList.add('sel')});
+ if(existing){fields.forEach(([id,label,type])=>{const v=existing.data?.[id];if(type==='mood'){moodValue=Number(v||0);document.querySelectorAll('[data-mood]').forEach(x=>x.classList.toggle('sel',Number(x.dataset.mood)===moodValue))}else if(type==='chips'){chipValue=normalizeChip(v);document.querySelectorAll('[data-chip]').forEach(x=>x.classList.toggle('sel',x.dataset.chip===chipValue))}else if(type==='range'){mapValues[id]=Number(v||0);document.querySelectorAll(`[data-range="${id}"]`).forEach(x=>x.classList.toggle('sel',Number(x.dataset.val)===mapValues[id]))}else if($('f_'+id))$('f_'+id).value=v||''})}
+ $('saveTool').onclick=saveToolRecord;
+ $('clearTool').onclick=()=>{moodValue=0;chipValue='';mapValues={};editingRecordId=null;v53RenderToolForm()};
+ v52RefreshSteps();
+}
+renderToolForm=v53RenderToolForm; window.renderToolForm=v53RenderToolForm;
+
+window.v53OpenTool=function(id){
+ if(id==='certificate'){v53ShowView('certificateView');return}
+ if(!FORM_DEFS[id]){v53GoHome();return}
+ selectedTool=id;moodValue=0;chipValue='';mapValues={};editingRecordId=null;
+ v53RenderToolForm();v53ShowView('toolView');
+ setTimeout(()=>{const top=document.getElementById('toolView');if(top)top.scrollIntoView({behavior:'smooth',block:'start'})},30);
+};
+openTool=window.v53OpenTool;
+
+// Regenerate tool buttons with the final handler.
+renderTools=function(){
+ $('toolGrid').innerHTML=TOOL_DATA.map(t=>`<article class="tool"><div class="tooltop"><span class="num">${t.n}</span><span>${t.icon}</span></div><div class="icon">${t.icon}</div><h3>${L(t.name)}</h3><p>${L(t.desc)}</p><button type="button" class="btn primary" style="width:100%;margin-top:13px" onclick="v53OpenTool('${t.id}')">${t.id==='certificate'?L(UI.viewCert):L(UI.openTool)}</button></article>`).join('')
+};
+window.renderTools=renderTools;
+
+// Quick needs and scenario recommendations also use the final navigation.
+window.v4OpenNeed=function(id){v53ShowView('scenarioView');setTimeout(()=>showScenario(id),40)};
+const v53OldShowScenario=window.showScenario;
+window.showScenario=function(id){
+ const s=SCENARIOS[id];if(!s)return;
+ const tool=toolObj(s.tool);
+ $('scenarioGuide').innerHTML=`<div class="guidebox"><h3>${s.icon} ${s.code}｜${L(s.title)}</h3><p>${L(s.intro)}</p><ul class="questions">${s.qs.map(q=>`<li>${L(q)}</li>`).join('')}</ul><div class="recommend">${L(UI.recommended)}${tool.icon} ${L(tool.name)}</div><div class="btnrow"><button type="button" class="btn primary" onclick="v53OpenTool('${s.tool}')">${L(UI.startPractice)}</button></div></div>`;
+ $('scenarioGuide').scrollIntoView({behavior:'smooth',block:'start'});
+};
+
+// Editing from history always reopens the guided version, not the old form.
+window.editRecord=function(id){const r=db().records.find(x=>x.id===id);if(!r)return;selectedTool=r.tool;editingRecordId=id;moodValue=0;chipValue='';mapValues={};v53RenderToolForm(r);v53ShowView('toolView')};
+
+// Final bilingual labels for V5.3 navigation.
+function v53RefreshLabels(){
+ const en=LANG==='en';
+ const b=document.getElementById('backHome');if(b)b.textContent=en?'← Toolbox Home':'← 工具首页';
+ const h=document.getElementById('v53HistoryBtn');if(h)h.textContent=en?'📖 My Growth Journal':'📖 我的成长记录';
+ const n=document.getElementById('v53NavNotice');if(n)n.textContent=en?'If you have used this tool before, your past entries appear below under “Your past reflections.” Sign in to your member account to bring cloud records back on this device.':'如果你以前用过这个工具，旧记录会显示在下面的「以前的我写过什么？」；登录会员账号后，也会从云端带回来。';
+ const v=document.getElementById('v53Version');if(v)v.textContent='V5.3 · GUIDED + HISTORY';
+}
+const v53PrevSetLanguage=setLanguage;
+setLanguage=function(lang){v53PrevSetLanguage(lang);v53RefreshLabels();renderTools();if(selectedTool&&document.getElementById('toolView')?.classList.contains('active')){const r=editingRecordId?db().records.find(x=>x.id===editingRecordId):null;v53RenderToolForm(r)}};window.setLanguage=setLanguage;
+
+// Re-bind all top navigation buttons and visible content after every older patch has finished.
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>v53ShowView(b.dataset.view));
+const bh=document.getElementById('backHome');if(bh)bh.onclick=v53GoHome;
+renderTools();v4RenderNeedQuick();renderScenarioCards();v53RefreshLabels();v5RenderCompanion();renderHistory();
+// Query string ?tool=... remains supported.
+setTimeout(()=>{const p=new URLSearchParams(location.search),tool=p.get('tool');if(tool&&FORM_DEFS[tool])v53OpenTool(tool)},30);
+
 </script>
+
+<script>/* V5.3 deep-link view helper */window.addEventListener('load',()=>{const p=new URLSearchParams(location.search);if(p.get('view')==='historyView'&&typeof v53ShowView==='function')setTimeout(()=>v53ShowView('historyView'),80)});</script>
 </body></html>
