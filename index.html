@@ -207,7 +207,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
     <input accept=".json,application/json" id="backupFile" style="display:none" type="file"/>
     <button id="resetAll">🧹 清除当前资料</button>
   </div>
-  <div class="v5CloudBar"><span class="v5CloudPill local" id="v5CloudStatus">💻 目前保存在这台设备</span></div><div class="v53Version" id="v53Version">V5.3 · GUIDED + HISTORY</div>
+  <div class="v5CloudBar"><span class="v5CloudPill local" id="v5CloudStatus">💻 目前保存在这台设备</span></div><div class="v53Version" id="v53Version">V5.4 · CLICK FIX + GUIDED HISTORY</div>
 </section>
 <section class="v51CompanionTop"><div class="v5Companion" id="v5Companion"></div></section>
 <div class="stats">
@@ -235,7 +235,7 @@ input:focus,textarea:focus,select:focus{border-color:#91aa8e;box-shadow:0 0 0 3p
 <section class="view" id="gardenView"><div class="card"><h2 id="gardenTitle">🌷 我的幸福花园</h2><div class="sub" id="gardenSub">任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。</div><div class="garden"><div class="gardenmsg" id="gardenMsg"></div><div class="stagelegend" id="stageLegend"></div><div class="gardengrid" id="gardenGrid"></div></div></div></section>
 <section class="view" id="historyView"><div class="card"><h2 id="historyTitle">📚 全部幸福记录</h2><div class="sub" id="historySub">这里会汇总你使用13项工具保存过的记录。</div><div class="notice" id="historyNotice" style="margin:12px 0"></div><div class="v5HistoryTools"><select id="v5HistoryFilter"></select><input id="v5HistorySearch" type="search" placeholder="搜索以前写过的内容…"></div><div id="allHistory" class="v5Timeline"></div></div></section>
 <section class="view" id="certificateView"><div class="card"><h2 id="certTitle">🏆 21天完成证书</h2><div class="sub" id="certSub">满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。</div><label id="certNameLabel">学员姓名</label><input id="certName" placeholder="请输入姓名"/><div class="btnrow"><button class="btn primary" id="buildCert">生成 / 更新证书</button><button class="btn secondary" id="printCert">打印 / 存成 PDF</button></div><div class="status" id="certStatus"></div><div id="certificateBox" style="margin-top:16px"></div></div></section>
-<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.3<br/>更好的自己，从一个小小的决定开始。</div>
+<div class="footer" id="footerText">🌱 播种幸福｜我的幸福陪伴系统 · V5.4<br/>更好的自己，从一个小小的决定开始。</div>
 </div>
 
 <div class="v5AuthModal" id="v5AuthModal" role="dialog" aria-modal="true">
@@ -270,7 +270,7 @@ const UI={
  gardenTitle:bi('🌷 我的幸福花园','🌷 My Happiness Garden'),gardenSub:bi('任何工具只要完成并保存，当天就会算作一个实践日。一天最多计算一次。','Complete and save any tool to count that date as one practice day. Each calendar day counts once.'),
  historyTitle:bi('📖 我的幸福成长记录','📖 My Happiness Growth Journal'),historySub:bi('这里不是资料仓库，而是让你回看：以前发生了什么、我当时怎样想、播下什么种子，以及后来怎样。','This is not just a storage page. It lets you look back at what happened, how you responded, what seed you chose, and what happened afterwards.'),historyNotice:bi('☁️ 登录会员账号后，这里的成长记录会同步到云端；JSON 导出仍可作为额外备份。','☁️ After member sign-in, your growth journal syncs to the cloud. JSON export remains available as an extra backup.'),
  certTitle:bi('🏆 21天完成证书','🏆 21-Day Completion Certificate'),certSub:bi('满21个不同实践日后，可以正式生成自己的完成证书。未满21天也可以预览样式。','After at least 21 different practice days, you can generate your completion certificate. Before that, you can still preview it.'), certName:bi('学员姓名','Participant Name'), certPlaceholder:bi('请输入姓名','Enter your name'), buildCert:bi('生成 / 更新证书','Generate / Update Certificate'), printCert:bi('打印 / 存成 PDF','Print / Save as PDF'),
- footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.3<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.3<br/>Notice yourself · Choose again · Plant one seed at a time'),
+ footer:bi('🌱 播种幸福｜我的幸福陪伴系统 · V5.4<br/>看见自己 · 重新选择 · 每天播种','🌱 Planting Happiness | My Happiness Companion · V5.3<br/>Notice yourself · Choose again · Plant one seed at a time'),
  openTool:bi('打开工具 →','Open Tool →'), viewCert:bi('查看证书','View Certificate'), date:bi('日期','Date'), save:bi('保存这份记录','Save This Record'), update:bi('更新这份记录','Update This Record'), clear:bi('清空','Clear'), editing:bi('正在编辑已保存的记录。','Editing a saved record.'), edit:bi('编辑','Edit'), del:bi('删除','Delete'),
  noRecords:bi('🌿 还没有记录。先从一个最需要的工具开始吧。','🌿 No records yet. Start with the tool you need most today.'), startPractice:bi('开始这个练习 →','Start This Practice →'), recommended:bi('👉 建议使用：','👉 Recommended tool: ')
 };
@@ -633,7 +633,7 @@ function v53RefreshLabels(){
  const b=document.getElementById('backHome');if(b)b.textContent=en?'← Toolbox Home':'← 工具首页';
  const h=document.getElementById('v53HistoryBtn');if(h)h.textContent=en?'📖 My Growth Journal':'📖 我的成长记录';
  const n=document.getElementById('v53NavNotice');if(n)n.textContent=en?'If you have used this tool before, your past entries appear below under “Your past reflections.” Sign in to your member account to bring cloud records back on this device.':'如果你以前用过这个工具，旧记录会显示在下面的「以前的我写过什么？」；登录会员账号后，也会从云端带回来。';
- const v=document.getElementById('v53Version');if(v)v.textContent='V5.3 · GUIDED + HISTORY';
+ const v=document.getElementById('v53Version');if(v)v.textContent='V5.4 · CLICK FIX + GUIDED HISTORY';
 }
 const v53PrevSetLanguage=setLanguage;
 setLanguage=function(lang){v53PrevSetLanguage(lang);v53RefreshLabels();renderTools();if(selectedTool&&document.getElementById('toolView')?.classList.contains('active')){const r=editingRecordId?db().records.find(x=>x.id===editingRecordId):null;v53RenderToolForm(r)}};window.setLanguage=setLanguage;
@@ -648,4 +648,137 @@ setTimeout(()=>{const p=new URLSearchParams(location.search),tool=p.get('tool');
 </script>
 
 <script>/* V5.3 deep-link view helper */window.addEventListener('load',()=>{const p=new URLSearchParams(location.search);if(p.get('view')==='historyView'&&typeof v53ShowView==='function')setTimeout(()=>v53ShowView('historyView'),80)});</script>
+
+<style id="v54ClickSafetyStyle">
+/* V5.4: make interactive controls unambiguously clickable above decorative layers */
+.tool .btn,.scenario-card .btn,.guidebox .btn,.needBtn,.v53ToolNav .btn,.v52ReviewLink{
+  position:relative;z-index:20;pointer-events:auto;touch-action:manipulation;
+}
+</style>
+<script id="v54ClickSafetyPatch">
+(function(){
+  const q=id=>document.getElementById(id);
+  function showView(view){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    const target=q(view); if(target) target.classList.add('active');
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+    if(view==='progressView' && typeof renderProgress==='function')renderProgress();
+    if(view==='gardenView' && typeof renderGarden==='function')renderGarden();
+    if(view==='historyView'){
+      if(typeof v5PopulateHistoryFilters==='function')v5PopulateHistoryFilters();
+      if(typeof renderHistory==='function')renderHistory();
+    }
+    if(view==='certificateView' && typeof renderCertificate==='function')renderCertificate();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  window.v54ShowView=showView;
+
+  window.v54OpenTool=function(id){
+    try{
+      if(id==='certificate'){showView('certificateView');return;}
+      if(typeof FORM_DEFS==='undefined' || !FORM_DEFS[id]){
+        throw new Error('Unknown tool: '+id);
+      }
+      selectedTool=id; moodValue=0; chipValue=''; mapValues={}; editingRecordId=null;
+      if(typeof v53RenderToolForm==='function') v53RenderToolForm();
+      else if(typeof renderToolForm==='function') renderToolForm();
+      else throw new Error('Tool renderer unavailable');
+      showView('toolView');
+      setTimeout(()=>{const el=q('toolView');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},40);
+    }catch(err){
+      console.error('V5.4 open tool error',err);
+      alert((typeof LANG!=='undefined'&&LANG==='en')?'This tool could not open. Please refresh the page and try again.':'这个工具暂时无法打开，请刷新页面后再试。');
+    }
+  };
+  try{ openTool=window.v54OpenTool; }catch(e){}
+
+  window.v54OpenScenario=function(id){
+    try{
+      const s=SCENARIOS[id]; if(!s) throw new Error('Unknown scenario: '+id);
+      showView('scenarioView');
+      const tool=toolObj(s.tool);
+      const host=q('scenarioGuide');
+      if(!host) throw new Error('scenarioGuide missing');
+      host.innerHTML=`<div class="guidebox"><h3>${s.icon} ${s.code}｜${L(s.title)}</h3><p>${L(s.intro)}</p><ul class="questions">${s.qs.map(x=>`<li>${L(x)}</li>`).join('')}</ul><div class="recommend">${L(UI.recommended)}${tool.icon} ${L(tool.name)}</div><div class="btnrow"><button type="button" class="btn primary" data-v54-tool="${s.tool}">${L(UI.startPractice)}</button></div></div>`;
+      host.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(err){console.error('V5.4 scenario error',err);}
+  };
+
+  // Final renderers: no inline onclick. All actions use data attributes + delegated listeners.
+  renderTools=function(){
+    const host=q('toolGrid'); if(!host)return;
+    host.innerHTML=TOOL_DATA.map(t=>`<article class="tool"><div class="tooltop"><span class="num">${t.n}</span><span>${t.icon}</span></div><div class="icon">${t.icon}</div><h3>${L(t.name)}</h3><p>${L(t.desc)}</p><button type="button" class="btn primary" style="width:100%;margin-top:13px" data-v54-tool="${t.id}">${t.id==='certificate'?L(UI.viewCert):L(UI.openTool)}</button></article>`).join('');
+  };
+  window.renderTools=renderTools;
+
+  renderScenarioCards=function(){
+    const host=q('scenarioCards'); if(!host)return;
+    host.innerHTML=Object.entries(SCENARIOS).map(([id,s])=>`<article class="scenario-card"><div class="sym">${s.icon}</div><h3>${s.code}｜${L(s.title)}</h3><p>${L(s.desc)}</p><button type="button" class="btn primary" style="width:100%" data-v54-scenario="${id}">${LANG==='en'?'See what I can do now':'看看我现在可以怎么做'}</button></article>`).join('');
+  };
+  window.renderScenarioCards=renderScenarioCards;
+
+  v4RenderNeedQuick=function(){
+    const host=q('needQuickGrid'); if(!host)return;
+    const en=LANG==='en';
+    if(q('needNowTitle'))q('needNowTitle').textContent=en?'What is happening today?':'今天发生什么了？';
+    if(q('needNowLead'))q('needNowLead').textContent=en?'Do not study all 13 tools first. Choose what feels closest and I will take you directly to a useful practice.':'不用先研究13个工具。先选最接近你现在的情况，我会直接带你去适合的练习。';
+    host.innerHTML=V4_NEEDS.map(id=>{const sc=SCENARIOS[id];return `<button type="button" class="needBtn" data-v54-scenario="${id}">${sc.icon} ${L(sc.title)}</button>`}).join('');
+  };
+  window.v4RenderNeedQuick=v4RenderNeedQuick;
+
+  // Past-reflection block: history link also uses the same safe delegated navigation.
+  const oldPast=typeof v52PastBlock==='function'?v52PastBlock:null;
+  v52PastBlock=function(tool){
+    const en=LANG==='en', arr=v52ToolRecords(tool).slice(0,3);
+    if(!arr.length){
+      return `<div class="v52Past"><div class="v52PastTop"><h3>${en?'📖 Your past reflections':'📖 以前的我写过什么？'}</h3></div><div class="v52Empty">${en?'This is your first saved reflection for this tool. After you save today, it will appear here the next time you return.':'这是你第一次使用这个工具。今天保存以后，下次回来就会在这里看见以前写过的自己。'}</div></div>`;
+    }
+    return `<div class="v52Past"><div class="v52PastTop"><h3>${en?'📖 Your past reflections':'📖 以前的我写过什么？'}</h3><button class="v52ReviewLink" type="button" data-v54-history="${tool}">${en?'View all records →':'查看全部记录 →'}</button></div><div class="v52PastList">${arr.map(r=>{const key=v5KeyText(r),seed=v4ActionForRecord(r);return `<div class="v52PastItem"><b>${esc(r.date)} · ${v5FollowLabel(r.followup)}</b><p>${esc(v4Short(key||v4CoachResponse(r.tool,r.data||{}).body,150))}</p>${seed?`<div class="v52PastSeed">🌱 ${esc(v4Short(seed,120))}</div>`:''}</div>`}).join('')}</div></div>`;
+  };
+  window.v52PastBlock=v52PastBlock;
+
+  // Remove reliance on inline handlers for the two tool-page navigation buttons.
+  const home=q('backHome'); if(home){home.removeAttribute('onclick');home.dataset.v54Home='1';}
+  const hist=q('v53HistoryBtn'); if(hist){hist.removeAttribute('onclick');hist.dataset.v54History='all';}
+
+  // One capture-phase listener owns all tool/scenario navigation, even for dynamically-rendered buttons.
+  document.addEventListener('click',function(ev){
+    const toolBtn=ev.target.closest('[data-v54-tool]');
+    if(toolBtn){ev.preventDefault();ev.stopPropagation();window.v54OpenTool(toolBtn.dataset.v54Tool);return;}
+    const scBtn=ev.target.closest('[data-v54-scenario]');
+    if(scBtn){ev.preventDefault();ev.stopPropagation();window.v54OpenScenario(scBtn.dataset.v54Scenario);return;}
+    const hBtn=ev.target.closest('[data-v54-home]');
+    if(hBtn){ev.preventDefault();ev.stopPropagation();showView('homeView');setTimeout(()=>q('needQuickGrid')?.scrollIntoView({behavior:'smooth',block:'start'}),50);return;}
+    const rBtn=ev.target.closest('[data-v54-history]');
+    if(rBtn){ev.preventDefault();ev.stopPropagation();const tool=rBtn.dataset.v54History;if(tool&&tool!=='all')V5_HISTORY_FILTER=tool;else V5_HISTORY_FILTER='all';showView('historyView');return;}
+  },true);
+
+  // Keep editing from history in the guided experience.
+  window.editRecord=function(id){
+    const r=db().records.find(x=>x.id===id); if(!r)return;
+    selectedTool=r.tool;editingRecordId=id;moodValue=0;chipValue='';mapValues={};
+    if(typeof v53RenderToolForm==='function')v53RenderToolForm(r);else renderToolForm(r);
+    showView('toolView');
+  };
+
+  // Language switch re-renders every clickable region using V5.4 safe buttons.
+  const previousSetLanguage=window.setLanguage;
+  window.setLanguage=function(lang){
+    if(typeof previousSetLanguage==='function')previousSetLanguage(lang);
+    renderTools();v4RenderNeedQuick();renderScenarioCards();
+    const h=q('backHome');if(h){h.removeAttribute('onclick');h.dataset.v54Home='1';}
+    const j=q('v53HistoryBtn');if(j){j.removeAttribute('onclick');j.dataset.v54History='all';}
+    const ver=q('v53Version');if(ver)ver.textContent='V5.4 · CLICK FIX + GUIDED HISTORY';
+    if(selectedTool&&q('toolView')?.classList.contains('active')){
+      const r=editingRecordId?db().records.find(x=>x.id===editingRecordId):null;
+      if(typeof v53RenderToolForm==='function')v53RenderToolForm(r);
+    }
+  };
+
+  renderTools();v4RenderNeedQuick();renderScenarioCards();
+  const ver=q('v53Version');if(ver)ver.textContent='V5.4 · CLICK FIX + GUIDED HISTORY';
+  const footer=q('footerText');if(footer)footer.innerHTML=LANG==='en'?'🌱 Planting Happiness | My Happiness Companion · V5.4<br/>A better life can begin with one small decision.':'🌱 播种幸福｜我的幸福陪伴系统 · V5.4<br/>更好的自己，从一个小小的决定开始。';
+})();
+</script>
+
 </body></html>
